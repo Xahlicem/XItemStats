@@ -1,5 +1,5 @@
 # Item Stats+
-Item Stats+ will display more in depth stats for all weapons.
+Item Stats+ will display more in-depth stats for all weapons.
 #### e.g.
 Modded | Alt | Original
 --- | --- | ---
