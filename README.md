@@ -1,5 +1,5 @@
 # Item Stats+
-Item Stats+ will display total weapon damage and now bonus damage in parenthesis.
+Item Stats+ will display more in depth stats for all weapons.
 #### e.g.
 Modded | Alt | Original
 --- | --- | ---
