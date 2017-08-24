@@ -1,18 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace XItemStats.Items {
-    public class GlobalItemStatsMod : GlobalItem {
+    public class GlobalItemDamageMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.damage == 0 || item.damage <= 0) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++) {
                 if (tooltips[i].Name.Equals("Damage")) {
@@ -23,11 +17,19 @@ namespace XItemStats.Items {
                     damage -= baseItem.damage;
 
                     if (damage != 0) {
-                        tooltips[i].text = text[0] + "(" + ((damage > 0) ? "+" : "-") + Math.Abs(damage) + ")";
+                        tooltips[i].text = ((XItemStats.damage == 1) ? text[0] : baseItem.damage.ToString()) + "(" + ((damage > 0) ? "+" : "-") + Math.Abs(damage) + ")";
                         for (int j = 1; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
                     }
                 }
+            }
+        }
+    }
+    public class GlobalItemCritMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.crit == 0 || item.damage <= 0) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++) {
                 if (tooltips[i].Name.Equals("CritChance")) {
                     string[] text = tooltips[i].text.Split(' ');
                     Item baseItem = new Item();
@@ -40,11 +42,19 @@ namespace XItemStats.Items {
                     crit += (item.crit - baseItem.crit);
 
                     if (crit != 0) {
-                        tooltips[i].text = text[0] + "(" + ((crit > 0) ? "+" : "-") + Math.Abs(crit) + ")";
+                        tooltips[i].text = ((XItemStats.crit == 1) ? text[0] : (baseItem.crit + 4).ToString() + "%") + "(" + ((crit > 0) ? "+" : "-") + Math.Abs(crit) + ")";
                         for (int j = 1; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
                     }
                 }
+            }
+        }
+    }
+    public class GlobalItemSpeedMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.speed == 0) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++) {
                 if (tooltips[i].Name.Equals("Speed")) {
                     string[] text = tooltips[i].text.Split(' ');
                     Item baseItem = new Item();
@@ -60,11 +70,19 @@ namespace XItemStats.Items {
                         speedMod = speed - baseItem.useTime;
                     }
 
-                    tooltips[i].text = speed.ToString();
+                    tooltips[i].text = (XItemStats.speed == 1) ? speed.ToString() : (speed - speedMod).ToString();
                     if (speedMod != 0) tooltips[i].text += "(" + ((speedMod > 0) ? "+" : "-") + Math.Abs(speedMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
                 }
+            }
+        }
+    }
+    public class GlobalItemKnockMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.knock == 0) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++) {
                 if (tooltips[i].Name.Equals("Knockback")) {
                     string[] text = tooltips[i].text.Split(' ');
                     Item baseItem = new Item();
@@ -72,26 +90,42 @@ namespace XItemStats.Items {
                     float knockBack = item.knockBack;
                     float knockBackMod = knockBack - baseItem.knockBack;
 
-                    tooltips[i].text = knockBack.ToString();
+                    tooltips[i].text = (XItemStats.knock == 1) ? knockBack.ToString() : baseItem.knockBack.ToString();
                     if (knockBackMod != 0) tooltips[i].text += "(" + ((knockBackMod > 0) ? "+" : "-") + Math.Abs(knockBackMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
 
                 }
+            }
+        }
+    }
+    public class GlobalItemManaMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.mana == 0 || item.mana <= 0) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++) {
                 if (tooltips[i].Name.Equals("UseMana")) {
                     string[] text = tooltips[i].text.Split(' ');
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
-                    int damage = int.Parse(text[1]);
-                    damage -= baseItem.mana;
+                    int mana = int.Parse(text[1]);
+                    mana -= baseItem.mana;
 
-                    if (damage != 0) {
-                        tooltips[i].text = text[0] + " " + text[1] + "(" + ((damage > 0) ? "+" : "-") + Math.Abs(damage) + ")";
+                    if (mana != 0) {
+                        tooltips[i].text = text[0] + " " + ((XItemStats.mana == 1) ? text[1] : baseItem.mana.ToString()) + "(" + ((mana > 0) ? "+" : "-") + Math.Abs(mana) + ")";
                         for (int j = 2; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
                     }
                 }
-                //tooltips[i].text += " " + tooltips[i].Name;
+            }
+        }
+    }
+    public class GlobalItemMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (XItemStats.debug == 0) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++) {
+                tooltips[i].text += " " + tooltips[i].Name;
             }
         }
     }
