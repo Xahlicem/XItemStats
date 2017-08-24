@@ -1,3 +1,4 @@
 author = Xahlicem
-version = 1.0
+version = 1.0.1
 displayName = Item Stats+
+buildIgnore = .vs\*, Properties\*, *.csproj, *.user, obj\*, bin\*, *.config, tmod\*, ignore\*, ZVidBuild\*, Images\Old*, Images\AllIcons.psd, .git\*, LICENSE, .travis.yml, .gitignore
