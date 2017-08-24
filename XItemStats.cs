@@ -1,10 +1,10 @@
 using Terraria.ModLoader;
 
-namespace XItemDamage
+namespace XItemStats
 {
-	class XItemDamage : Mod
+	class XItemStats : Mod
 	{
-		public XItemDamage()
+		public XItemStats()
 		{
 			Properties = new ModProperties()
 			{

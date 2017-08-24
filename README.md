@@ -1,5 +1,5 @@
-# XItemDamage
-Item Damage+ will display total weapon damage and now bonus damage in parenthesis.
+# Item Stats+
+Item Stats+ will display total weapon damage and now bonus damage in parenthesis.
 #### e.g.
 Modded | Original
 --- | ---

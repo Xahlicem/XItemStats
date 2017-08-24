@@ -10,8 +10,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace XItemDamage.Items {
-    public class GlobalItemDamageMod : GlobalItem {
+namespace XItemStats.Items {
+    public class GlobalItemStatsMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (!(item.damage > 0)) return;
             for (int i = 0; i < tooltips.Count; i++) {
