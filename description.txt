@@ -1,5 +1,46 @@
-Item Stats+ will display total weapon damage and now bonus damage in parenthesis.
-e.g.
-50 (+20) melee damage
-instead of
-50 melee damage
+### Item Stats+
+Item Stats+ will display more in-depth stats for all weapons.
+Three diferent stlyes can be used
+#### e.g.
+
+#Original
+Mythical Demon Scythe
+40 magic damage
+9% critical strike chance
+Very fast speed
+Average knockback
+Uses 13 mana
+Casts demon scythe
++14% damage
++10% speed
++5% critical strike chance
+-7% mana cost
++15% knockback
+
+#Modded
+Mythical Demon Scythe
+40(+5) magic damage
+9%(+5) critical strike chance
+18(-2) (Very fast) speed
+5.75(+0.75) (Average) knockback
+Uses 13(-1)
+Casts demon scythe
++14% damage
++10% speed
++5% critical strike chance
+-7% mana cost
++15% knockback
+
+#Alt
+Mythical Demon Scythe
+35(+5) magic damage
+4%(+5) critical strike chance
+20(-2) (Very fast) speed
+5(+0.75) (Average) knockback
+Uses 14(-1) mana
+Casts demon scythe
++14% damage
++10% speed
++5% critical strike chance
+-7% mana cost
++15% knockback
