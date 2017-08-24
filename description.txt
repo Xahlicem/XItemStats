@@ -1,6 +1,18 @@
 ### Item Stats+
 Item Stats+ will display more in-depth stats for all weapons.
 Three diferent stlyes can be used
+
+### Changelog
+
+v1.1:
+- Added GUI!
+
+v1.0.1:
+- Slightly altered build file.
+
+v1.0:
+- Release!
+
 #### e.g.
 
 #Original

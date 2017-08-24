@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using XItemStats.UI;
 
 namespace XItemStats.Commands {
 
@@ -20,6 +21,10 @@ namespace XItemStats.Commands {
         }
 
         public override void Action(CommandCaller caller, string input, string[] args) {
+            if (args.Length == 0) {
+                XItemUI.visible = true;
+                return;
+            }
             if (args.Length != 2) return;
             int choice = 1;
             if (args[1].ToLower().Equals("off")) choice = 0;
@@ -51,6 +56,7 @@ namespace XItemStats.Commands {
                     XItemStats.mana = choice;
                     break;
             }
+            (mod as XItemStats).setRadio();
         }
 
     }
