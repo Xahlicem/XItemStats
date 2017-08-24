@@ -1,12 +1,17 @@
 # Item Stats+
 Item Stats+ will display total weapon damage and now bonus damage in parenthesis.
 #### e.g.
-Modded | Original
---- | ---
-Sharp Arkhalis | Sharp Arkhalis
-23 (+3) melee damage | 23 melee damage 
-4% critical strike chance | 4% critical strike chance
-Fast speed | Fast speed
-Weak knockback | Weak knockback
-'I didn't get this off of a Schmoo' | 'I didn't get this off of a Schmoo'
-+15% damage | +15% damage
+Modded | Alt | Original
+--- | --- | ---
+Mythical Demon Scythe | Mythical Demon Scythe | Mythical Demon Scythe
+40(+5) magic damage | 35(+5) magic damage | 40 magic damage
+9%(+5) critical strike chance | 4%(+5) critical strike chance | 9% critical strike chance
+18(-2) (Very fast) speed | 20(-2) (Very fast) speed | Very fast speed
+5.75(+0.75) (Average) knockback | 5(+0.75) (Average) knockback | Average knockback
+Uses 13(-1) mana | Uses 14(-1) mana | Uses 13 mana
+Casts demon scythe | Casts demon scythe | Casts demon scythe
++14% damage | +14% damage | +14% damage
++10% speed | +10% speed | +10% speed
++5% critical strike chance | +5% critical strike chance | +5% critical strike chance
+-7% mana cost | -7% mana cost | -7% mana cost
++15% knockback | +15% knockback | +15% knockback
