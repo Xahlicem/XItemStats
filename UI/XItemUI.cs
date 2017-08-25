@@ -12,6 +12,7 @@ namespace XItemStats.UI {
 
     class XItemUI : UIState {
         public UIPanel Panel { get; set; }
+
         public UIRadio Damage { get; set; }
         public UIRadio Crit { get; set; }
         public UIRadio Speed { get; set; }
