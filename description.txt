@@ -4,6 +4,9 @@ Three diferent stlyes can be used
 
 ### Changelog
 
+v1.2.1:
+- Added icon.
+
 v1.2:
 - Now saves!
 - Improvements to GUI.
