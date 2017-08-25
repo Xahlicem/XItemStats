@@ -4,6 +4,10 @@ Three diferent stlyes can be used
 
 ### Changelog
 
+v1.2:
+- Now saves!
+- Improvements to GUI.
+
 v1.1:
 - Added GUI!
 

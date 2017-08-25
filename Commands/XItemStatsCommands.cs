@@ -22,7 +22,7 @@ namespace XItemStats.Commands {
 
         public override void Action(CommandCaller caller, string input, string[] args) {
             if (args.Length == 0) {
-                XItemUI.visible = true;
+                XItemStats.Visible = true;
                 return;
             }
             if (args.Length != 2) return;
@@ -31,32 +31,32 @@ namespace XItemStats.Commands {
             if (args[1].ToLower().Equals("alt")) choice = 2;
             switch (args[0].ToLower()) {
                 case "debug":
-                    XItemStats.debug = choice;
+                    XItemStats.Debug = choice;
                     break;
                 case "damage":
-                    XItemStats.damage = choice;
+                    XItemStats.Damage = choice;
                     break;
                 case "crit":
-                    XItemStats.crit = choice;
+                    XItemStats.Crit = choice;
                     break;
                 case "speed":
-                    XItemStats.speed = choice;
+                    XItemStats.Speed = choice;
                     break;
                 case "knock":
-                    XItemStats.knock = choice;
+                    XItemStats.Knock = choice;
                     break;
                 case "mana":
-                    XItemStats.mana = choice;
+                    XItemStats.Mana = choice;
                     break;
                 case "all":
-                    XItemStats.damage = choice;
-                    XItemStats.crit = choice;
-                    XItemStats.speed = choice;
-                    XItemStats.knock = choice;
-                    XItemStats.mana = choice;
+                    XItemStats.Damage = choice;
+                    XItemStats.Crit = choice;
+                    XItemStats.Speed = choice;
+                    XItemStats.Knock = choice;
+                    XItemStats.Mana = choice;
                     break;
             }
-            (mod as XItemStats).setRadio();
+            (mod as XItemStats).SetRadio();
         }
 
     }
