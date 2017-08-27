@@ -4,8 +4,9 @@ Three diferent stlyes can be used
 
 ### Changelog
 
-v1.2.1:
-- Added icon.
+v1.2.2:
+- You can click "Off", "On', and "Alt" to set all.
+- Added "#" option to knockback and speed.
 
 v1.2:
 - Now saves!
@@ -13,9 +14,6 @@ v1.2:
 
 v1.1:
 - Added GUI!
-
-v1.0.1:
-- Slightly altered build file.
 
 v1.0:
 - Release!

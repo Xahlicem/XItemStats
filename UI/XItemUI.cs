@@ -11,6 +11,8 @@ using Terraria.UI;
 namespace XItemStats.UI {
 
     class XItemUI : UIState {
+        internal const float width = 195f;
+        internal const float height = 155f;
         public UIPanel Panel { get; set; }
 
         public UIRadio Damage { get; set; }
@@ -26,8 +28,8 @@ namespace XItemStats.UI {
             Panel.SetPadding(0);
             Panel.Left.Set(150, 0f);
             Panel.Top.Set(150, 0f);
-            Panel.Width.Set(175f, 0f);
-            Panel.Height.Set(155f, 0f);
+            Panel.Width.Set(width, 0f);
+            Panel.Height.Set(height, 0f);
             Panel.BackgroundColor = new Color(73, 94, 171);
             Panel.OnMouseDown += new UIElement.MouseEvent(DragStart);
             Panel.OnMouseUp += new UIElement.MouseEvent(DragEnd);
@@ -41,7 +43,7 @@ namespace XItemStats.UI {
 
             exit = new UIText("X");
             exit.Top.Set(5, 0f);
-            exit.Left.Set(150, 0f);
+            exit.Left.Set(width - 25f, 0f);
             exit.Width.Set(25, 0f);
             exit.Height.Set(25, 0f);
             exit.TextColor = Color.DarkRed;
@@ -50,38 +52,79 @@ namespace XItemStats.UI {
             exit.OnClick += ExitClick;
             Panel.Append(exit);
 
-            UIText r0 = new UIText("Off", 0.65f);
-            r0.Top.Set(30, 0f);
-            r0.Left.Set(5, 0f);
-            r0.Width.Set(25, 0f);
-            r0.Height.Set(15, 0f);
-            Panel.Append(r0);
+            UIText textOff = new UIText("Off", 0.65f);
+            textOff.Top.Set(30, 0f);
+            textOff.Left.Set(5, 0f);
+            textOff.Width.Set(25, 0f);
+            textOff.Height.Set(15, 0f);
+            textOff.TextColor = Color.LightGray;
+            textOff.OnMouseOver += ExitEnter;
+            textOff.OnMouseOut += ExitExit;
+            textOff.OnClick += SetAll;
+            Panel.Append(textOff);
 
-            UIText r1 = new UIText("On", 0.65f);
-            r1.Top.Set(30, 0f);
-            r1.Left.Set(25, 0f);
-            r1.Width.Set(25, 0f);
-            r1.Height.Set(15, 0f);
-            Panel.Append(r1);
+            UIText textOn = new UIText("On", 0.65f);
+            textOn.Top.Set(30, 0f);
+            textOn.Left.Set(25, 0f);
+            textOn.Width.Set(25, 0f);
+            textOn.Height.Set(15, 0f);
+            textOn.TextColor = Color.LightGray;
+            textOn.OnMouseOver += ExitEnter;
+            textOn.OnMouseOut += ExitExit;
+            textOn.OnClick += SetAll;
+            Panel.Append(textOn);
 
-            UIText r2 = new UIText("Alt", 0.65f);
-            r2.Top.Set(30, 0f);
-            r2.Left.Set(45, 0f);
-            r2.Width.Set(25, 0f);
-            r2.Height.Set(15, 0f);
-            Panel.Append(r2);
+            UIText textAlt = new UIText("Alt", 0.65f);
+            textAlt.Top.Set(30, 0f);
+            textAlt.Left.Set(45, 0f);
+            textAlt.Width.Set(25, 0f);
+            textAlt.Height.Set(15, 0f);
+            textAlt.TextColor = Color.LightGray;
+            textAlt.OnMouseOver += ExitEnter;
+            textAlt.OnMouseOut += ExitExit;
+            textAlt.OnClick += SetAll;
+            Panel.Append(textAlt);
+
+            UIText textNum = new UIText("#", 0.65f);
+            textNum.Top.Set(30, 0f);
+            textNum.Left.Set(65, 0f);
+            textNum.Width.Set(25, 0f);
+            textNum.Height.Set(15, 0f);
+            Panel.Append(textNum);
 
             Damage = new UIRadio("Damage", 3, Panel, 10, 50, XItemStats.Damage);
 
             Crit = new UIRadio("Critical", 3, Panel, 10, 70, XItemStats.Crit);
 
-            Speed = new UIRadio("Speed", 3, Panel, 10, 90, XItemStats.Speed);
+            Speed = new UIRadio("Speed", 4, Panel, 10, 90, XItemStats.Speed);
 
-            Knock = new UIRadio("Knockback", 3, Panel, 10, 110, XItemStats.Knock);
+            Knock = new UIRadio("Knockback", 4, Panel, 10, 110, XItemStats.Knock);
 
             Mana = new UIRadio("Mana Use", 3, Panel, 10, 130, XItemStats.Mana);
 
             base.Append(Panel);
+        }
+
+        private void SetAll(UIMouseEvent evt, UIElement listeningElement) {
+            int i = 0;
+            switch ((listeningElement as UIText).Text) {
+                case "Off":
+                    i = 0;
+                    break;
+                case "On":
+                    i = 1;
+                    break;
+                case "Alt":
+                    i = 2;
+                    break;
+            }
+            Damage.SetValue(i);
+            Crit.SetValue(i);
+            Speed.SetValue(i);
+            Knock.SetValue(i);
+            Mana.SetValue(i);
+
+            Main.PlaySound(SoundID.MenuTick);
         }
 
         private void ExitClick(UIMouseEvent evt, UIElement listeningElement) {
@@ -91,11 +134,25 @@ namespace XItemStats.UI {
         }
 
         private void ExitEnter(UIMouseEvent evt, UIElement listeningElement) {
-            exit.TextColor = Color.Red;
+            UIText text = (UIText) listeningElement;
+            switch (((UIText) listeningElement).Text) {
+                default : text.TextColor = Color.White;
+                break;
+                case "X":
+                        text.TextColor = Color.Red;
+                    break;
+            }
         }
 
         private void ExitExit(UIMouseEvent evt, UIElement listeningElement) {
-            exit.TextColor = Color.DarkRed;
+            UIText text = (UIText) listeningElement;
+            switch (((UIText) listeningElement).Text) {
+                default : text.TextColor = Color.LightGray;
+                break;
+                case "X":
+                        text.TextColor = Color.DarkRed;
+                    break;
+            }
         }
 
         Vector2 offset;
@@ -125,12 +182,12 @@ namespace XItemStats.UI {
                 Panel.Top.Set(MousePosition.Y - offset.Y, 0f);
                 Recalculate();
             }
-            if (Panel.Left.Pixels > Main.screenWidth - 175) {
-                Panel.Left.Set(Main.screenWidth - 175, 0f);
+            if (Panel.Left.Pixels > Main.screenWidth - width) {
+                Panel.Left.Set(Main.screenWidth - width, 0f);
                 Recalculate();
             }
-            if (Panel.Top.Pixels > Main.screenHeight - 155) {
-                Panel.Top.Set(Main.screenHeight - 155, 0f);
+            if (Panel.Top.Pixels > Main.screenHeight - height) {
+                Panel.Top.Set(Main.screenHeight - height, 0f);
                 Recalculate();
             }
             if (Panel.Left.Pixels < 0) {
@@ -141,7 +198,6 @@ namespace XItemStats.UI {
                 Panel.Top.Set(0, 0f);
                 Recalculate();
             }
-
         }
 
         public override void Recalculate() {
@@ -169,7 +225,7 @@ namespace XItemStats.UI {
             group[on].SetState(true);
             UIText text = new UIText(name);
             text.Top.Set(top, 0f);
-            text.Left.Set(left + number * 20, 0f);
+            text.Left.Set(left + 4 * 20, 0f);
             text.Height.Set(15, 0f);
             text.Width.Set(95, 0f);
             panel.Append(text);
@@ -213,6 +269,8 @@ namespace XItemStats.UI {
         public void SetValue(int value) {
             for (int i = 0; i < group.Length; i++) group[i].SetState(false);
             group[value].SetState(true);
+
+            Set();
         }
     }
 }

@@ -73,8 +73,8 @@ namespace XItemStats.Items {
                         speedMod = speed - baseItem.useTime;
                     }
 
-                    tooltips[i].text = (XItemStats.Speed == 1) ? speed.ToString() : (speed - speedMod).ToString();
-                    if (speedMod != 0) tooltips[i].text += "(" + ((speedMod > 0) ? "+" : "-") + Math.Abs(speedMod) + ")";
+                    tooltips[i].text = (XItemStats.Speed == 1 || XItemStats.Speed == 3) ? speed.ToString() : (speed - speedMod).ToString();
+                    if (speedMod != 0 && XItemStats.Speed != 3) tooltips[i].text += "(" + ((speedMod > 0) ? "+" : "-") + Math.Abs(speedMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
                 }
@@ -94,8 +94,8 @@ namespace XItemStats.Items {
                     float knockBack = item.knockBack;
                     float knockBackMod = knockBack - baseItem.knockBack;
 
-                    tooltips[i].text = (XItemStats.Knock == 1) ? knockBack.ToString() : baseItem.knockBack.ToString();
-                    if (knockBackMod != 0) tooltips[i].text += "(" + ((knockBackMod > 0) ? "+" : "-") + Math.Abs(knockBackMod) + ")";
+                    tooltips[i].text = (XItemStats.Knock == 1 || XItemStats.Knock == 3) ? knockBack.ToString() : baseItem.knockBack.ToString();
+                    if (knockBackMod != 0 && XItemStats.Knock != 3) tooltips[i].text += "(" + ((knockBackMod > 0) ? "+" : "-") + Math.Abs(knockBackMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
 
