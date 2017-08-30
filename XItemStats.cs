@@ -5,6 +5,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.UI;
 using XItemStats.UI;
+using Terraria.ID;
 
 namespace XItemStats {
     class XItemStats : Mod {
@@ -38,6 +39,7 @@ namespace XItemStats {
         }
 
         public override void Load() {
+            if (Main.netMode == NetmodeID.Server) return;
             xItemUi = new XItemUI();
             xItemUi.Activate();
             ui = new UserInterface();
@@ -72,6 +74,7 @@ namespace XItemStats {
         }
 
         public override void ModifyInterfaceLayers(System.Collections.Generic.List<GameInterfaceLayer> layers) {
+            if (Main.netMode == NetmodeID.Server) return;
             int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (MouseTextIndex != -1) {
                 layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(

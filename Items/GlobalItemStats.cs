@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace XItemStats.Items {
 
     public class GlobalItemDamageMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Damage == 0 || item.damage <= 0) return;
+            if (XItemStats.Damage == 0 || item.damage <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
                 if (tooltips[i].Name.Equals("Damage")) {
@@ -29,7 +30,7 @@ namespace XItemStats.Items {
 
     public class GlobalItemCritMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Crit == 0 || item.damage <= 0) return;
+            if (XItemStats.Crit == 0 || item.damage <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
                 if (tooltips[i].Name.Equals("CritChance")) {
@@ -55,7 +56,7 @@ namespace XItemStats.Items {
 
     public class GlobalItemSpeedMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Speed == 0) return;
+            if (XItemStats.Speed == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
                 if (tooltips[i].Name.Equals("Speed")) {
@@ -84,7 +85,7 @@ namespace XItemStats.Items {
 
     public class GlobalItemKnockMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Knock == 0 || item.knockBack == 0) return;
+            if (XItemStats.Knock == 0 || item.knockBack == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
                 if (tooltips[i].Name.Equals("Knockback")) {
@@ -106,7 +107,7 @@ namespace XItemStats.Items {
 
     public class GlobalItemManaMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Mana == 0 || item.mana <= 0) return;
+            if (XItemStats.Mana == 0 || item.mana <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
                 if (tooltips[i].Name.Equals("UseMana")) {
@@ -128,7 +129,7 @@ namespace XItemStats.Items {
 
     public class GlobalItemMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (XItemStats.Debug == 0) return;
+            if (XItemStats.Debug == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++) {
                 tooltips[i].text += " " + tooltips[i].Name;
