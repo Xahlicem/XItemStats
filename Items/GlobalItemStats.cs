@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,6 +23,10 @@ namespace XItemStats.Items {
                         tooltips[i].text = ((XItemStats.Damage == 1) ? text[0] : baseItem.damage.ToString()) + "(" + ((damage > 0) ? "+" : "-") + Math.Abs(damage) + ")";
                         for (int j = 1; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
+                        if (XItemStats.Color) {
+                            tooltips[i].isModifier = true;
+                            tooltips[i].isModifierBad = (damage < 0);
+                        }
                     }
                 }
 
@@ -48,6 +53,10 @@ namespace XItemStats.Items {
                         tooltips[i].text = ((XItemStats.Crit == 1) ? text[0] : (baseItem.crit + 4).ToString() + "%") + "(" + ((crit > 0) ? "+" : "-") + Math.Abs(crit) + ")";
                         for (int j = 1; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
+                        if (XItemStats.Color) {
+                            tooltips[i].isModifier = true;
+                            tooltips[i].isModifierBad = (crit < 0);
+                        }
                     }
                 }
 
@@ -78,6 +87,10 @@ namespace XItemStats.Items {
                     if (speedMod != 0 && XItemStats.Speed != 3) tooltips[i].text += "(" + ((speedMod > 0) ? "+" : "-") + Math.Abs(speedMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
+                    if (XItemStats.Color && speedMod != 0) {
+                        tooltips[i].isModifier = true;
+                        tooltips[i].isModifierBad = (speedMod > 0);
+                    }
                 }
 
         }
@@ -99,9 +112,11 @@ namespace XItemStats.Items {
                     if (knockBackMod != 0 && XItemStats.Knock != 3) tooltips[i].text += "(" + ((knockBackMod > 0) ? "+" : "-") + Math.Abs(knockBackMod) + ")";
                     for (int j = 0; j < text.Length; j++)
                         tooltips[i].text += ((j == 0) ? " (" : " ") + text[j] + ((j == text.Length - 2) ? ")" : "");
-
+                    if (XItemStats.Color && knockBackMod != 0) {
+                        tooltips[i].isModifier = true;
+                        tooltips[i].isModifierBad = (knockBackMod < 0);
+                    }
                 }
-
         }
     }
 
@@ -121,9 +136,12 @@ namespace XItemStats.Items {
                         tooltips[i].text = text[0] + " " + ((XItemStats.Mana == 1) ? text[1] : baseItem.mana.ToString()) + "(" + ((mana > 0) ? "+" : "-") + Math.Abs(mana) + ")";
                         for (int j = 2; j < text.Length; j++)
                             tooltips[i].text += " " + text[j];
+                        if (XItemStats.Color) {
+                            tooltips[i].isModifier = true;
+                            tooltips[i].isModifierBad = (mana > 0);
+                        }
                     }
                 }
-
         }
     }
 
@@ -134,6 +152,19 @@ namespace XItemStats.Items {
             for (int i = 0; i < tooltips.Count; i++) {
                 tooltips[i].text += " " + tooltips[i].Name;
             }
+        }
+    }
+
+    public class ColorItemMod : GlobalItem {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (!XItemStats.Color || Main.netMode == NetmodeID.Server) return;
+            Player player = Main.player[item.owner];
+            for (int i = 0; i < tooltips.Count; i++)
+                if (tooltips[i].Name.Contains("Prefix") && !tooltips[i].Name.Contains("Size")) {
+                    tooltips.RemoveAt(i);
+                    i--;
+                }
+
         }
     }
 }

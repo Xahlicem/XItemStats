@@ -1,11 +1,9 @@
 using System.IO;
 using Terraria;
-using Terraria.GameContent.UI;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.UI;
 using XItemStats.UI;
-using Terraria.ID;
 
 namespace XItemStats {
     class XItemStats : Mod {
@@ -15,6 +13,8 @@ namespace XItemStats {
 
         private static int debug = 0;
         public static int Debug { get { return debug; } set { debug = value; Configuration.Put("Debug", debug); } }
+        private static bool color = false;
+        public static bool Color { get { return color; } set { color = value; Configuration.Put("Color", color); } }
         private static int damage = 1;
         public static int Damage { get { return damage; } set { damage = value; Configuration.Put("Damage", damage); } }
         private static int crit = 1;
@@ -47,6 +47,7 @@ namespace XItemStats {
 
             if (Configuration.Load()) {
                 Configuration.Get("Debug", ref debug);
+                Configuration.Get("Color", ref color);
                 Configuration.Get("Damage", ref damage);
                 Configuration.Get("Crit", ref crit);
                 Configuration.Get("Speed", ref speed);
@@ -60,6 +61,7 @@ namespace XItemStats {
                 xItemUi.Recalculate();
             } else {
                 Configuration.Put("Debug", Debug);
+                Configuration.Put("Color", color);
                 Configuration.Put("Damage", Damage);
                 Configuration.Put("Crit", Crit);
                 Configuration.Put("Speed", Speed);

@@ -15,6 +15,7 @@ namespace XItemStats.UI {
         internal const float height = 155f;
         public UIPanel Panel { get; set; }
 
+        public UIText TextColor { get; set; }
         public UIRadio Damage { get; set; }
         public UIRadio Crit { get; set; }
         public UIRadio Speed { get; set; }
@@ -22,6 +23,7 @@ namespace XItemStats.UI {
         public UIRadio Mana { get; set; }
 
         private UIText exit;
+        private bool colorHover = false;
 
         public override void OnInitialize() {
             Panel = new UIPanel();
@@ -57,7 +59,7 @@ namespace XItemStats.UI {
             textOff.Left.Set(5, 0f);
             textOff.Width.Set(25, 0f);
             textOff.Height.Set(15, 0f);
-            textOff.TextColor = Color.LightGray;
+            textOff.TextColor = Color.Gray;
             textOff.OnMouseOver += ExitEnter;
             textOff.OnMouseOut += ExitExit;
             textOff.OnClick += SetAll;
@@ -68,7 +70,7 @@ namespace XItemStats.UI {
             textOn.Left.Set(25, 0f);
             textOn.Width.Set(25, 0f);
             textOn.Height.Set(15, 0f);
-            textOn.TextColor = Color.LightGray;
+            textOn.TextColor = Color.Gray;
             textOn.OnMouseOver += ExitEnter;
             textOn.OnMouseOut += ExitExit;
             textOn.OnClick += SetAll;
@@ -79,7 +81,7 @@ namespace XItemStats.UI {
             textAlt.Left.Set(45, 0f);
             textAlt.Width.Set(25, 0f);
             textAlt.Height.Set(15, 0f);
-            textAlt.TextColor = Color.LightGray;
+            textAlt.TextColor = Color.Gray;
             textAlt.OnMouseOver += ExitEnter;
             textAlt.OnMouseOut += ExitExit;
             textAlt.OnClick += SetAll;
@@ -92,6 +94,17 @@ namespace XItemStats.UI {
             textNum.Height.Set(15, 0f);
             Panel.Append(textNum);
 
+            TextColor = new UIText("Color");
+            TextColor.Top.Set(30, 0f);
+            TextColor.Left.Set(90, 0f);
+            TextColor.Width.Set(95, 0f);
+            TextColor.Height.Set(15, 0f);
+            TextColor.TextColor = Color.Gray;
+            TextColor.OnMouseOver += ExitEnter;
+            TextColor.OnMouseOut += ExitExit;
+            TextColor.OnClick += SetColor;
+            Panel.Append(TextColor);
+
             Damage = new UIRadio("Damage", 3, Panel, 10, 50, XItemStats.Damage);
 
             Crit = new UIRadio("Critical", 3, Panel, 10, 70, XItemStats.Crit);
@@ -103,6 +116,10 @@ namespace XItemStats.UI {
             Mana = new UIRadio("Mana Use", 3, Panel, 10, 130, XItemStats.Mana);
 
             base.Append(Panel);
+        }
+
+        private void SetColor(UIMouseEvent evt, UIElement listeningElement) {
+            XItemStats.Color = !XItemStats.Color;
         }
 
         private void SetAll(UIMouseEvent evt, UIElement listeningElement) {
@@ -141,16 +158,22 @@ namespace XItemStats.UI {
                 case "X":
                         text.TextColor = Color.Red;
                     break;
+                case "Color":
+                        colorHover = true;
+                    break;
             }
         }
 
         private void ExitExit(UIMouseEvent evt, UIElement listeningElement) {
             UIText text = (UIText) listeningElement;
             switch (((UIText) listeningElement).Text) {
-                default : text.TextColor = Color.LightGray;
+                default : text.TextColor = Color.Gray;
                 break;
                 case "X":
                         text.TextColor = Color.DarkRed;
+                    break;
+                case "Color":
+                        colorHover = false;
                     break;
             }
         }
@@ -198,6 +221,8 @@ namespace XItemStats.UI {
                 Panel.Top.Set(0, 0f);
                 Recalculate();
             }
+            if (XItemStats.Color) TextColor.TextColor = (colorHover) ? new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB) : new Color(Main.DiscoR / 3, Main.DiscoG / 3, Main.DiscoB / 3);
+            else TextColor.TextColor = (colorHover) ? Color.White : Color.Gray;
         }
 
         public override void Recalculate() {

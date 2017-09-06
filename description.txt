@@ -4,6 +4,11 @@ Three diferent stlyes can be used
 
 ### Changelog
 
+v1.3:
+- Color option added.
+  - Removes prefix text and changes color of stats.
+- Icon updated.
+
 v1.2.4:
 - Rebuilt for tModLoader v0.10.1.
 - Knockback rounded.
@@ -14,10 +19,6 @@ v1.2.3:
 v1.2.2:
 - You can click "Off", "On', and "Alt" to set all.
 - Added "#" option to knockback and speed.
-
-v1.2:
-- Now saves!
-- Improvements to GUI.
 
 #### e.g.
 
