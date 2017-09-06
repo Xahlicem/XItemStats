@@ -93,7 +93,7 @@ namespace XItemStats.Items {
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     float knockBack = item.knockBack;
-                    float knockBackMod = knockBack - baseItem.knockBack;
+                    float knockBackMod = (float) Math.Round(knockBack - baseItem.knockBack, 2);
 
                     tooltips[i].text = (XItemStats.Knock == 1 || XItemStats.Knock == 3) ? knockBack.ToString() : baseItem.knockBack.ToString();
                     if (knockBackMod != 0 && XItemStats.Knock != 3) tooltips[i].text += "(" + ((knockBackMod > 0) ? "+" : "-") + Math.Abs(knockBackMod) + ")";
