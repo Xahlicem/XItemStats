@@ -150,7 +150,7 @@ namespace XItemStats.Items {
             if (XItemStats.Debug == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++) {
-                tooltips[i].text += " " + tooltips[i].Name;
+                tooltips[i].text += " " + tooltips[i].Name + "-" + tooltips[i].mod;
             }
         }
     }
@@ -160,7 +160,7 @@ namespace XItemStats.Items {
             if (!XItemStats.Color || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Contains("Prefix") && !tooltips[i].Name.Contains("Size")) {
+                if (tooltips[i].mod.Equals("Terraria") && tooltips[i].Name.Contains("Prefix") && !tooltips[i].Name.Contains("PrefixAcc") && !tooltips[i].Name.Equals("PrefixSize") && !tooltips[i].Name.Equals("PrefixShootSpeed")) {
                     tooltips.RemoveAt(i);
                     i--;
                 }

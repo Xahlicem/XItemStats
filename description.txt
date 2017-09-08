@@ -4,6 +4,11 @@ Three diferent stlyes can be used
 
 ### Changelog
 
+v1.3.1:
+- Color no longer effects accessories or armor.
+  - Thanks to Nordblum for pointing this out!
+- Color will still show velocity.
+
 v1.3:
 - Color option added.
   - Removes prefix text and changes color of stats.
@@ -15,10 +20,6 @@ v1.2.4:
 
 v1.2.3:
 - Fixed Multiplayer hosting problem.
-
-v1.2.2:
-- You can click "Off", "On', and "Alt" to set all.
-- Added "#" option to knockback and speed.
 
 #### e.g.
 
