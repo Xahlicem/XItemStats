@@ -12,8 +12,9 @@ namespace XItemStats.Items {
             if (XItemStats.Damage == 0 || item.damage <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Equals("Damage")) {
+                if (tooltips[i].Name.Equals("Damage")) try {
                     string[] text = tooltips[i].text.Split(' ');
+                    if (!text[text.Length - 1].Equals("damage")) return;
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     int damage = int.Parse(text[0]);
@@ -28,7 +29,7 @@ namespace XItemStats.Items {
                             tooltips[i].isModifierBad = (damage < 0);
                         }
                     }
-                }
+                } catch (Exception) { }
 
         }
     }
@@ -38,8 +39,9 @@ namespace XItemStats.Items {
             if (XItemStats.Crit == 0 || item.damage <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Equals("CritChance")) {
+                if (tooltips[i].Name.Equals("CritChance")) try {
                     string[] text = tooltips[i].text.Split(' ');
+                    if (!text[text.Length - 1].Equals("chance")) return;
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     int crit = -4;
@@ -58,8 +60,7 @@ namespace XItemStats.Items {
                             tooltips[i].isModifierBad = (crit < 0);
                         }
                     }
-                }
-
+                } catch (Exception) { }
         }
     }
 
@@ -68,15 +69,16 @@ namespace XItemStats.Items {
             if (XItemStats.Speed == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Equals("Speed")) {
+                if (tooltips[i].Name.Equals("Speed")) try {
                     string[] text = tooltips[i].text.Split(' ');
+                    if (!text[text.Length - 1].Equals("speed")) return;
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     int speed = 0;
                     int speedMod = 0;
                     if (item.melee) {
                         speed = item.useAnimation - 1;
-                        speed = (int)((float) speed * player.meleeSpeed);
+                        speed = (int) ((float) speed * player.meleeSpeed);
                         speedMod = speed - (baseItem.useAnimation - 1);
                     } else {
                         speed = item.useTime;
@@ -91,8 +93,7 @@ namespace XItemStats.Items {
                         tooltips[i].isModifier = true;
                         tooltips[i].isModifierBad = (speedMod > 0);
                     }
-                }
-
+                } catch (Exception) { }
         }
     }
 
@@ -101,8 +102,9 @@ namespace XItemStats.Items {
             if (XItemStats.Knock == 0 || item.knockBack == 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Equals("Knockback")) {
+                if (tooltips[i].Name.Equals("Knockback")) try {
                     string[] text = tooltips[i].text.Split(' ');
+                    if (!text[text.Length - 1].Equals("knockback")) return;
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     float knockBack = item.knockBack;
@@ -116,7 +118,7 @@ namespace XItemStats.Items {
                         tooltips[i].isModifier = true;
                         tooltips[i].isModifierBad = (knockBackMod < 0);
                     }
-                }
+                } catch (Exception) { }
         }
     }
 
@@ -125,8 +127,9 @@ namespace XItemStats.Items {
             if (XItemStats.Mana == 0 || item.mana <= 0 || Main.netMode == NetmodeID.Server) return;
             Player player = Main.player[item.owner];
             for (int i = 0; i < tooltips.Count; i++)
-                if (tooltips[i].Name.Equals("UseMana")) {
+                if (tooltips[i].Name.Equals("UseMana")) try {
                     string[] text = tooltips[i].text.Split(' ');
+                    if (!text[text.Length - 1].Equals("mana")) return;
                     Item baseItem = new Item();
                     baseItem.CloneDefaults(item.type);
                     int mana = int.Parse(text[1]);
@@ -141,7 +144,7 @@ namespace XItemStats.Items {
                             tooltips[i].isModifierBad = (mana > 0);
                         }
                     }
-                }
+                } catch (Exception) { }
         }
     }
 

@@ -4,6 +4,10 @@ Three diferent stlyes can be used
 
 ### Changelog
 
+v1.3.2:
+- Weapons that change default tooltip layout will not be affected due to compatibility issues.
+  - Thanks to Nextshot for pointing this out!
+
 v1.3.1:
 - Color no longer effects accessories or armor.
   - Thanks to Nordblum for pointing this out!
@@ -17,9 +21,6 @@ v1.3:
 v1.2.4:
 - Rebuilt for tModLoader v0.10.1.
 - Knockback rounded.
-
-v1.2.3:
-- Fixed Multiplayer hosting problem.
 
 #### e.g.
 
