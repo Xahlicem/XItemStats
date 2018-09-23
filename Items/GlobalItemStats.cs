@@ -152,6 +152,7 @@ namespace XItemStats.Items {
         static Dictionary<int, string> ammoTypeList = new Dictionary<int, string>(){
             {23,"Gel"},
             {40,"Arrow"},
+            {71,"Coin"},
             {97,"Bullet"},
             {283,"Dart"},
             {771,"Rocket"},
