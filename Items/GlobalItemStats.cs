@@ -148,6 +148,39 @@ namespace XItemStats.Items {
         }
     }
 
+    public class GlobalItemAmmoMod : GlobalItem {
+        static Dictionary<int, string> ammoTypeList = new Dictionary<int, string>(){
+            {23,"Gel"},
+            {40,"Arrow"},
+            {71,"Coin"},
+            {97,"Bullet"},
+            {283,"Dart"},
+            {771,"Rocket"},
+            {780,"Solution"}
+        };
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+            if (Main.netMode == NetmodeID.Server) return;
+            if (item.ammo > 0) {
+                for (int i = 0; i < tooltips.Count; i++){
+                    if (tooltips[i].Name.Equals("Ammo")) try {
+                        string ammoType = Lang.GetItemNameValue(item.ammo);
+                        if (ammoTypeList.ContainsKey(item.ammo)) ammoType = ammoTypeList[item.ammo];
+                        if (item.Name != ammoType)
+                            tooltips[i].text = "Ammo in " + ammoType + " ([i:" + item.ammo + "]) category";
+                    } catch (Exception) { }
+                }
+            }
+            if (item.useAmmo > 0) {
+                try {
+                    string ammoType = Lang.GetItemNameValue(item.useAmmo);
+                    if (ammoTypeList.ContainsKey(item.useAmmo)) ammoType = ammoTypeList[item.useAmmo];
+                    TooltipLine line = new TooltipLine(mod, "useAmmo", "Uses " + ammoType + " ([i:" + item.useAmmo + "]) for ammo");
+                    tooltips.Add(line);
+                } catch (Exception) { }
+            }
+        }
+    }
+
     public class GlobalItemMod : GlobalItem {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (XItemStats.Debug == 0 || Main.netMode == NetmodeID.Server) return;
